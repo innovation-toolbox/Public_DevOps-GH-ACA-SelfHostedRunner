@@ -22,7 +22,7 @@ az containerapp job create -n "$JOB_NAME" -g "$ACA_RESOURCE_GROUP" --environment
         --polling-interval 30 \
         --scale-rule-name "github-runner" \
         --scale-rule-type "github-runner" \
-        --scale-rule-metadata "github-runner=https://api.github.com" "owner=$GH_OWNER" "runnerScope=org" "targetWorkflowQueueLength=1" "labels=org,python,python3.9" \
+        --scale-rule-metadata "github-runner=https://api.github.com" "applicationID=$GH_APP_CLIENT_ID" "installationID=$GH_APP_INSTALLATION_ID" "owner=$GH_OWNER" "runnerScope=org" "targetWorkflowQueueLength=1" "labels=org,python,python3.9" \
         --scale-rule-auth "appKey=app-key" \
         --cpu "2.0" \
         --memory "4Gi" \
