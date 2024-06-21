@@ -55,5 +55,5 @@ jobs:
         with:
           push: true
           context: "{{defaultContext}}:docker"
-          file: "{context}/Dockerfile.python.github"
+          file: "Dockerfile.python.github"
           tags: ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io/${{ env.CONTAINER_IMAGE_NAME }}
