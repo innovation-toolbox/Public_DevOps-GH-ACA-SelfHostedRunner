@@ -2,7 +2,9 @@
 
 generate_jwt() {
     local client_id="$1"
-    local pem="$2"
+    local private_key="$2"
+    echo "private_key is $private_key"
+
     local now=$(date +%s)
     local iat=$((${now} - 60)) # Issues 60 seconds in the past
     local exp=$((${now} + 600)) # Expires 10 minutes in the future
@@ -27,7 +29,7 @@ generate_jwt() {
     # Signature
     local header_payload="${header}"."${payload}"
     local signature=$(
-        openssl dgst -sha256 -sign <(echo -n "${pem}") \
+        openssl dgst -sha256 -sign <(echo -n "${private_key}") \
         <(echo -n "${header_payload}") | b64enc
     )
 
@@ -60,12 +62,15 @@ get_registration_token() {
 
     # Appel API pour obtenir le token d'enregistrement
     local reg_token="$(curl --request POST \
-        --url "${reg_url}" \
+        --url $reg_url \
         --header 'Accept: application/vnd.github.v3+json' \
         --header "Authorization: Bearer ${token}" \
         --header 'X-GitHub-Api-Version: 2022-11-28' \
         -fsSL \
       | jq -r '.token')"
-
     echo "${reg_token}"
+}
+
+clean_env_var() {
+  echo "$1" | sed -e 's/^"//' -e 's/"$//' -e "s/^'//" -e "s/'$//"
 }
