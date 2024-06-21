@@ -9,7 +9,7 @@ set -o pipefail
 pem=${PRIVATE_KEY}
 client_id=${GH_APP_CLIENT_ID}
 inst_id=${GH_APP_INSTALLATION_ID}
-org=${ORG_URL}
+org=${GH_URL}
 reg_url=${REGISTRATION_TOKEN_API_URL}
 labels=${LABELS}
 
