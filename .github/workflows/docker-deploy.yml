@@ -54,6 +54,5 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          context: "{{defaultContext}}:docker"
-          file: "Dockerfile.python.github"
+          file: "docker/Dockerfile.python.github"
           tags: ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io/${{ env.CONTAINER_IMAGE_NAME }}
