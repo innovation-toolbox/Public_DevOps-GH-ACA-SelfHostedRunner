@@ -28,7 +28,7 @@ env:
   GH_APP_INSTALLATION_ID: "${{vars.GH_APP_INSTALLATION_ID}}"
   GH_OWNER: "${{vars.GH_OWNER}}"
   ORG_NAME: "${{vars.ORG_NAME}}"
-  LABELS: "${{vars.LABELS}}
+  LABELS: "${{vars.LABELS}}"
 
 permissions:
   id-token: write
