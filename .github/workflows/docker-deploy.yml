@@ -46,7 +46,7 @@ jobs:
       - name: Docker login
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.CONTAINER_REGISTRY_NAME }}
+          registry: ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io
           username: ${{ env.CONTAINER_REGISTRY_USERNAME }}
           password: ${{ env.CONTAINER_REGISTRY_PASSWORD }}
 
