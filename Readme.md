@@ -35,3 +35,8 @@ Then select App Settings from the GH App page to export the private key used to 
       ![ghapp-details](assets/ghapp-details.png)
 1. Head to the bottom of `your Ghapp` > General page to generate a private key
 1. Save the `.pem` file generated
+
+# Sources : 
+- [GH Self-Hosted Runner for Organizations : REST API][gh-app-sh-org-api]
+
+[gh-app-sh-org-api] : https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#get-a-self-hosted-runner-for-an-organization
