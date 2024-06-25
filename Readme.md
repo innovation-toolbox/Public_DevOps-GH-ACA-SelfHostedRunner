@@ -37,6 +37,6 @@ Then select App Settings from the GH App page to export the private key used to 
 1. Save the `.pem` file generated
 
 # Sources : 
-- [GH Self-Hosted Runner for Organizations : REST API](gh-app-sh-org-api)
+- [GH Self-Hosted Runner for Organizations : REST API][gh-app-sh-org-api]
 
 [gh-app-sh-org-api]: https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#get-a-self-hosted-runner-for-an-organization
