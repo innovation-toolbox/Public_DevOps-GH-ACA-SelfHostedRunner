@@ -1,0 +1,58 @@
+name: Create ACA Job Self-Hosted Runner
+
+#on:
+  #workflow_dispatch:
+    #inputs:
+      #environment:
+        #description: "Deployment Environment"
+        #required: false
+        #type: environment
+        #default: "dev"
+env:
+  # Getting secrets from GitHub Secrets
+  ACTIONS_RUNNER_DEBUG: true
+  AZURE_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
+  AZURE_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID }}"
+  AZURE_SUBSCRIPTION_ID: "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+  CONTAINER_APP_ENVIRONMENT_IDENTITY_ID: "${{ secrets.CONTAINER_APP_ENVIRONMENT_IDENTITY_ID }}"
+  GH_APP_PRIVATE_KEY: "${{ secrets.GH_APP_PRIVATE_KEY }}"
+
+  # Setting environment variables
+  ACA_ENVIRONMENT: "${{vars.ACA_ENVIRONMENT}}"
+  ACA_JOB_NAME: "${{vars.ACA_JOB_NAME}}"
+  ACA_RESOURCE_GROUP: "${{vars.ACA_RESOURCE_GROUP}}"
+  CONTAINER_IMAGE_NAME: "${{vars.CONTAINER_IMAGE_NAME}}"
+  CONTAINER_REGISTRY_NAME: "${{vars.CONTAINER_REGISTRY_NAME}}"
+  GH_APP_CLIENT_ID: "${{vars.GH_APP_CLIENT_ID}}"
+  GH_APP_INSTALLATION_ID: "${{vars.GH_APP_INSTALLATION_ID}}"
+  GH_OWNER: "${{vars.GH_OWNER}}"
+  ORG_NAME: "${{vars.ORG_NAME}}"
+  LABELS: "${{vars.LABELS}}"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Azure Login with OIDC
+        uses: azure/login@v1
+        with:
+          tenant-id: ${{ env.AZURE_TENANT_ID }}
+          client-id: ${{ env.AZURE_CLIENT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deleted ACA job
+        run: |
+          az containerapp job delete --name ${{env.ACA_JOB_NAME}} --resource-group ${{env.ACA_RESOURCE_GROUP}} --yes
+        continue-on-error: true
+
+      - name: Create ACA job
+        run: |
+          ./scripts/aca_job_create/job_create.sh
