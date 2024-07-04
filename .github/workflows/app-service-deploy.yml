@@ -3,13 +3,7 @@ name: Deploy App Service Python
 on:
   #push:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Deployment Environment"
-        required: false
 
-        type: environment
-        default: "dev"
 env:
   ACTIONS_RUNNER_DEBUG: true
   AZURE_TENANT_ID: "${{ secrets.AZURE_TENANT_ID }}"
@@ -26,9 +20,6 @@ permissions:
 jobs:
   build_and_deploy:
     runs-on: [self-hosted, python]
-    environment: ${{ github.event.inputs.environment }}
-
-
     steps:
       - uses: actions/checkout@v4
 
