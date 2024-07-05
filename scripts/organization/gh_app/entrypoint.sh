@@ -5,15 +5,13 @@
 
 set -o pipefail
 
-# Documentation des variables d'environnement nécessaires
-# GH_APP_PRIVATE_KEY: Clé privée de l'application GitHub. Exemple: "-----BEGIN PRIVATE KEY-----\n..."
-# REGISTRATION_TOKEN_API_URL: URL de l'API pour obtenir le jeton d'inscription. Exemple: "https://api.github.com/..."
-# GH_URL: URL de GitHub ou de l'instance GitHub Enterprise. Exemple: "https://github.com"
-# LABELS: Étiquettes à appliquer au runner. Exemple: "linux,x64,production"
-# GH_APP_CLIENT_ID: ID client de l'application GitHub. Exemple: "123456"
-# GH_APP_INSTALLATION_ID: ID d'installation de l'application GitHub. Exemple: "12345678"
-
-# Liste des variables d'environnement requises
+# Mandatory Environment Variables : 
+# GH_APP_PRIVATE_KEY: Clé privée de l'application GitHub. Exemple: "-----BEGIN PRIVATE KEY-----\n..." 
+# REGISTRATION_TOKEN_API_URL: URL de l'API pour obtenir le jeton d'inscription. Exemple: "https://api.github.com/..." 
+# GH_URL: URL de GitHub ou de l'instance GitHub Enterprise. Exemple: "https://github.com" 
+# LABELS: Étiquettes à appliquer au runner. Exemple: "linux,x64,production" 
+# GH_APP_CLIENT_ID: ID client de l'application GitHub. Exemple: "123456" 
+# GH_APP_INSTALLATION_ID: ID d'installation de l'application GitHub. Exemple: "12345678" 
 required_vars=("GH_APP_PRIVATE_KEY" "REGISTRATION_TOKEN_API_URL" "GH_URL" "LABELS" "GH_APP_CLIENT_ID" "GH_APP_INSTALLATION_ID")
 
 # Vérification que toutes les variables requises sont définies
