@@ -3,12 +3,7 @@ name: Docker deploy images to ACR
 on:
   #push:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: "Deployment Environment"
-        required: false
-        type: environment
-        default: "dev"
+
 env:
   # Getting secrets from GitHub Secrets
   ACTIONS_RUNNER_DEBUG: true
@@ -31,8 +26,6 @@ permissions:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
-
     steps:
       - uses: actions/checkout@v4
 
