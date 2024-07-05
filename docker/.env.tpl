@@ -11,3 +11,5 @@ GH_APP_INSTALLATION_ID=<INSTALLATION-ID>
 GH_APP_PRIVATE_KEY=-----BEGIN RSA PRIVATE KEY-----\n<'value_with_\n_per_each_line'>\n-----END RSA PRIVATE KEY-----\n
 LABELS=org,python,python3.9 #comma separated list of labels
 CONTAINER_APP_ENVIRONMENT_IDENTITY_ID=/subscriptions/<SUB-ID>/resourceGroups/<RG-Name>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<MI-Name>
+REGISTRATION_TOKEN_API_URL=https://api.github.com/orgs/<ORG_NAME>/actions/runners/registration-token
+GH_URL=https://github.com/<ORG_NAME>
