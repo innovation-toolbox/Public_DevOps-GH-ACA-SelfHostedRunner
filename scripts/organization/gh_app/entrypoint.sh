@@ -10,8 +10,8 @@ set -o pipefail
 # REGISTRATION_TOKEN_API_URL: URL de l'API pour obtenir le jeton d'inscription. Exemple: "https://api.github.com/..."
 # GH_URL: URL de GitHub ou de l'instance GitHub Enterprise. Exemple: "https://github.com"
 # LABELS: Étiquettes à appliquer au runner. Exemple: "linux,x64,production"
-# GH_APP_CLIENT_ID: ID client de l'application GitHub. Exemple: "Iv1.1234567890abcdef"
-# GH_APP_INSTALLATION_ID: ID d'installation de l'application GitHub. Exemple: "1234567"
+# GH_APP_CLIENT_ID: ID client de l'application GitHub. Exemple: "123456"
+# GH_APP_INSTALLATION_ID: ID d'installation de l'application GitHub. Exemple: "12345678"
 
 # Liste des variables d'environnement requises
 required_vars=("GH_APP_PRIVATE_KEY" "REGISTRATION_TOKEN_API_URL" "GH_URL" "LABELS" "GH_APP_CLIENT_ID" "GH_APP_INSTALLATION_ID")
@@ -19,18 +19,10 @@ required_vars=("GH_APP_PRIVATE_KEY" "REGISTRATION_TOKEN_API_URL" "GH_URL" "LABEL
 # Vérification que toutes les variables requises sont définies
 for var in "${required_vars[@]}"; do
   if [ -z "${!var}" ]; then
-    echo "Erreur: La variable d'environnement '$var' n'est pas définie." >&2
+    echo "Exception: The following required environment variable is not defined : '$var'" >&2
     exit 1
   fi
 done
-
-# Retrieving environment variables in a clean format for ease of use
-gh_app_private_key=$GH_APP_PRIVATE_KEY
-registration_token_api_url=$REGISTRATION_TOKEN_API_URL
-gh_url=$GH_URL
-labels=$LABELS
-gh_app_client_id=$GH_APP_CLIENT_ID
-gh_app_installation_id=$GH_APP_INSTALLATION_ID
 
 # Create JWT from GH app client id and private key
 jwt=$(generate_jwt "$GH_APP_CLIENT_ID" "$GH_APP_PRIVATE_KEY")
@@ -53,7 +45,7 @@ else
 fi
 
 # Retrieve a short lived runner registration token using the GH App Access Token
-reg_token=$(get_registration_token "${registration_token_api_url}" "${access_token}")
+reg_token=$(get_registration_token "${REGISTRATION_TOKEN_API_URL}" "${access_token}")
 
 if [ -n "$reg_token" ]; then
     echo "Registration token generated successfully : ${reg_token}"
@@ -64,4 +56,4 @@ fi
 
 # Configure and run the Github Self Hosted Runner
 echo "Starting the Github Self Hosted Runner ..."
-./config.sh --url ${gh_url} --token $reg_token --unattended --ephemeral --labels ${labels} && ./run.sh
+./config.sh --url $GH_URL --token $reg_token --unattended --ephemeral --labels $LABELS && ./run.sh

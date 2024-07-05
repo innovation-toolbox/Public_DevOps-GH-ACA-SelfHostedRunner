@@ -4,9 +4,6 @@ generate_jwt() {
     local client_id=$(printf '%q' "$1")
     local private_key=$(printf '%q' "$2")
 
-    printf 'client id is %q' $client_id
-    printf 'private key is %q': $private_key
-
     local now=$(date +%s)
     local iat=$((${now} - 60)) # Issues 60 seconds in the past
     local exp=$((${now} + 600)) # Expires 10 minutes in the future

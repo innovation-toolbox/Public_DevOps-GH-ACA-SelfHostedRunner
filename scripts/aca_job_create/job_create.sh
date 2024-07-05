@@ -15,7 +15,7 @@ az containerapp job create -n "$ACA_JOB_NAME" -g "$ACA_RESOURCE_GROUP" --environ
         --cpu "2.0" \
         --memory "4Gi" \
         --secrets "app-key=$GH_APP_PRIVATE_KEY" \
-        --env-vars "GH_APP_PRIVATE_KEY=secretref:app-key" "GH_URL=https://github.com/$ORG_NAME" "REGISTRATION_TOKEN_API_URL=https://api.github.com/orgs/$ORG_NAME/actions/runners/registration-token" "LABELS=$LABELS" "GH_APP_CLIENT_ID=$GH_APP_CLIENT_ID" "GH_APP_INSTALLATION_ID=$GH_APP_INSTALLATION_ID"\
+        --env-vars "GH_APP_PRIVATE_KEY=secretref:app-key" "GH_URL=$GH_URL" "REGISTRATION_TOKEN_API_URL=$REGISTRATION_TOKEN_API_URL" "LABELS=$LABELS" "GH_APP_CLIENT_ID=$GH_APP_CLIENT_ID" "GH_APP_INSTALLATION_ID=$GH_APP_INSTALLATION_ID"\
         --registry-server "$CONTAINER_REGISTRY_NAME.azurecr.io" \
         --registry-identity $CONTAINER_APP_ENVIRONMENT_IDENTITY_ID \
         --mi-user-assigned $CONTAINER_APP_ENVIRONMENT_IDENTITY_ID
