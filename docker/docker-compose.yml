@@ -1,0 +1,12 @@
+services:
+  gh_shr_python:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.python.github
+    image: gh-shr-python:${IMAGE_TAG}
+    container_name: gh_shr_python
+    env_file:
+      - .env
+    environment:
+      REGISTRATION_TOKEN_API_URL: "https://api.github.com/orgs/${ORG_NAME}/actions/runners/registration-token"
+      GH_URL: "https://github.com/${ORG_NAME}"

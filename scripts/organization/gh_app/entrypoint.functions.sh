@@ -1,9 +1,8 @@
 #entrypoint_org_gh_app.functions.sh
 
 generate_jwt() {
-    local client_id="$1"
-    local private_key="$2"
-    echo "private_key is $private_key"
+    local client_id=$(printf '%q' "$1")
+    local private_key=$(printf '%q' "$2")
 
     local now=$(date +%s)
     local iat=$((${now} - 60)) # Issues 60 seconds in the past
@@ -29,7 +28,7 @@ generate_jwt() {
     # Signature
     local header_payload="${header}"."${payload}"
     local signature=$(
-        openssl dgst -sha256 -sign <(echo -n "${private_key}") \
+        openssl dgst -sha256 -sign <(eval echo -n -e "${private_key}") \
         <(echo -n "${header_payload}") | b64enc
     )
 
@@ -39,8 +38,8 @@ generate_jwt() {
 }
 
 get_access_token() {
-    local inst_id="$1"
-    local jwt="$2"
+    local inst_id=$(printf '%q' "$1")
+    local jwt=$(printf '%q' "$2")
 
     # Appel API pour obtenir le token d'accès
     local access_token_response="$(curl --request POST \
@@ -57,8 +56,8 @@ get_access_token() {
 }
 
 get_registration_token() {
-    local reg_url="$1"
-    local token="$2"
+    local reg_url=$(printf '%q' "$1")
+    local token=$(printf '%q' "$2")
 
     # Appel API pour obtenir le token d'enregistrement
     local reg_token="$(curl --request POST \
