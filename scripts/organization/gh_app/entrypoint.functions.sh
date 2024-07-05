@@ -31,7 +31,7 @@ generate_jwt() {
     # Signature
     local header_payload="${header}"."${payload}"
     local signature=$(
-        openssl dgst -sha256 -sign <(echo -n "${private_key}") \
+        openssl dgst -sha256 -sign <(eval echo -n -e "${private_key}") \
         <(echo -n "${header_payload}") | b64enc
     )
 
