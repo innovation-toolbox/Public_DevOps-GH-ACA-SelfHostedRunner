@@ -24,6 +24,8 @@ env:
   GH_OWNER: "${{vars.GH_OWNER}}"
   ORG_NAME: "${{vars.ORG_NAME}}"
   LABELS: "${{vars.LABELS}}"
+  REGISTRATION_TOKEN_API_URL: "${{vars.REGISTRATION_TOKEN_API_URL}}"
+  GH_URL: "${{vars.GH_URL}}"
 
 permissions:
   id-token: write
