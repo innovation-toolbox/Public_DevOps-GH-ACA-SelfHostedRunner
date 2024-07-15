@@ -36,7 +36,13 @@ Then select App Settings from the GH App page to export the private key used to 
 1. Head to the bottom of `your Ghapp` > General page to generate a private key
 1. Save the `.pem` file generated
 
-# Sources : 
+1. Then Set the secrets in the Repo as follows (details in the file `scripts/aca_job_create/.env.tpl`) :
+   ![gh-actions-secrets](assets/gh-actions-secrets.png)
+1. As well as the following variables with the values retrieved earlier :
+   ![gh-actions-vars](assets/gh-actions-vars.png)
+
+# Sources :
+
 - [GH Self-Hosted Runner for Organizations : REST API][gh-app-sh-org-api]
 - [Default Runner Group Settings][gh-rg-settings]
 
